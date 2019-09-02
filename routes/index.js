@@ -52,7 +52,6 @@ router.get("/", async function(req, res, next) {
 
 router.post("/user/update-role", function(req, res) {
     let { value, pk, type, user_id } = req.body;
-    console.log(req.body);
     if (type == "INSERT") {
         let data = {
             user_id,
@@ -76,7 +75,6 @@ router.post("/user/update-role", function(req, res) {
             `UPDATE user_has_role SET role_id = ? WHERE id = ?`,
             [value, pk],
             function(err, status) {
-                console.log(status);
                 if (err) {
                     console.log(err);
                     res.status(503).send(err);
