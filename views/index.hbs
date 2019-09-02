@@ -1,2 +1,37 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>User List</h1>
+{{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+{{/if}}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>role</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each users as |u ui|}}
+            <tr>
+                <td>{{u.name}}</td>
+                <td>{{u.mobile}}</td>
+                <td>{{u.email}}</td>
+                <td>
+                    <a
+                        href="#"
+                        data-type="select"
+                        data-value="{{#if u.role_id}}{{u.role_id}}{{else}}{{/if}}"
+                        data-url="/user/update-role"
+                        class="update-role"
+                        data-user-id="{{u.user_id}}"
+                        data-pk="{{#if u.user_has_role_id}}{{u.user_has_role_id}}{{else}}false{{/if}}"
+                    >
+                        {{u.role}}
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
